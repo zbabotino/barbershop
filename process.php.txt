@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Appointment Admin Panel</h1>
+    </div>
+    <div class="appointment-list">
+      <h2>Appointments</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Preferred Time</th>
+        </tr>
+        <?php
+        // Read appointment data from a file (assuming each line is a JSON-encoded appointment)
+        $appointments = file('appointments.txt', FILE_IGNORE_NEW_LINES);
+        
+        foreach ($appointments as $appointment) {
+            $data = json_decode($appointment, true);
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($data['name']) . "</td>";
+            echo "<td>" . htmlspecialchars($data['phone']) . "</td>";
+            echo "<td>" . htmlspecialchars($data['time']) . "</td>";
+            echo "</tr>";
+        }
+        ?>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
